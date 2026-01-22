@@ -50,5 +50,6 @@
   "recobo/chemical-bert-uncased": "498698d28fcf7ce5954852a0444c864bdf232b64",
   "thenlper/gte-base": "c078288308d8dee004ab72c6191778064285ec0c",
   "thenlper/gte-large": "4bef63f39fcc5e2d6b0aae83089f307af4970164",
-  "thenlper/gte-small": "17e1f347d17fe144873b1201da91788898c639cd"
+  "thenlper/gte-small": "17e1f347d17fe144873b1201da91788898c639cd",
+  "google/embeddinggemma-300m": "57c266a740f537b4dc058e1b0cda161fd15afa75"
 }
