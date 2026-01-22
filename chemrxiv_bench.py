@@ -2,6 +2,9 @@ import sys
 import json
 from pathlib import Path
 
+from dotenv import load_dotenv
+load_dotenv()
+
 from loguru import logger
 import mteb
 from mteb.cache import ResultCache
