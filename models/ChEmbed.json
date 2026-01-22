@@ -1,0 +1,8 @@
+{
+  "BASF-AI/ChEmbed-full": "e135f91559b82f0f8128075ac272a3b845c6a479",
+  "BASF-AI/ChEmbed-plug": "4822ae672dabb8e655d37f0774dc3572dfd0b729",
+  "BASF-AI/ChEmbed-prog": "731fab08aceb0a958c553d9c3e5c49ed16481cb3",
+  "BASF-AI/ChEmbed-vanilla": "ce564699a8df39cf3412207c2c0ceb9e77f693cb",
+  "nomic-ai/nomic-embed-text-v1": "0759316f275aa0cb93a5b830973843ca66babcf5",
+  "nomic-ai/nomic-embed-text-v1-unsupervised": "b53d557b15ae63852847c222d336c1609eced93c"
+}
