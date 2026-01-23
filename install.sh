@@ -59,6 +59,10 @@ echo "Auto-configuring build: Detected ${RAM_GB}GB RAM, ${CORES} Cores -> MAX_JO
 echo "Installing mteb[flash_attention]..."
 MAX_JOBS=$MAX_JOBS uv pip install "mteb[flash_attention]==2.7.1" --no-build-isolation
 
+# 7. Install additional MTEB extras
+echo "Installing mteb extras (gritlm, openai)..."
+uv pip install "mteb[gritlm]" "mteb[openai]"
+
 # 7. Install the project and other dependencies
 echo "Installing project dependencies..."
 uv pip install .
