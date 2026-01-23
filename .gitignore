@@ -28,3 +28,8 @@ logs/
 # OS
 .DS_Store
 Thumbs.db
+
+# Distribution / Packaging
+dist/
+build/
+*.egg-info/

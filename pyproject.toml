@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "MTEB evaluation scripts for ChemRxiv and ChemTEB benchmarks"
 requires-python = ">=3.12"
 dependencies = [
-    "mteb==2.7.1",
+    "mteb[flash_attention]==2.7.1",
     "sentence-transformers>=5.2.0",
     "einops>=0.8.0",
     "loguru>=0.7.3",
@@ -13,7 +13,16 @@ dependencies = [
     "openai>=2.15.0",
     "huggingface-hub>=0.34.0,<1.0",
     "ruff>=0.14.13",
+    "torch==2.9.0",
+    "numpy<2.0.0",
 ]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["*"]
+exclude = ["logs", "models", "results"]
 
 [tool.uv]
 package = false
+
+
