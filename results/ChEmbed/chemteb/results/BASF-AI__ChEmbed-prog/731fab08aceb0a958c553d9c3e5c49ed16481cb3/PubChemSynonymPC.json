@@ -1,0 +1,48 @@
+{
+  "dataset_revision": "5037d69d177c9628fb79cb57eea1299178b28c1b",
+  "task_name": "PubChemSynonymPC",
+  "mteb_version": "2.7.8",
+  "scores": {
+    "test": [
+      {
+        "similarity_accuracy": 0.946289,
+        "similarity_f1": 0.666667,
+        "similarity_precision": 0.873016,
+        "similarity_recall": 0.539216,
+        "similarity_ap": 0.639455,
+        "cosine_accuracy": 0.946289,
+        "cosine_f1": 0.666667,
+        "cosine_precision": 0.873016,
+        "cosine_recall": 0.539216,
+        "cosine_ap": 0.639455,
+        "manhattan_accuracy": 0.946777,
+        "manhattan_f1": 0.666667,
+        "manhattan_precision": 0.886179,
+        "manhattan_recall": 0.534314,
+        "manhattan_ap": 0.637753,
+        "euclidean_accuracy": 0.946289,
+        "euclidean_f1": 0.666667,
+        "euclidean_precision": 0.873016,
+        "euclidean_recall": 0.539216,
+        "euclidean_ap": 0.639455,
+        "dot_accuracy": 0.946289,
+        "dot_f1": 0.666667,
+        "dot_precision": 0.873016,
+        "dot_recall": 0.539216,
+        "dot_ap": 0.639455,
+        "max_accuracy": 0.946777,
+        "max_f1": 0.666667,
+        "max_precision": 0.886179,
+        "max_recall": 0.539216,
+        "max_ap": 0.639455,
+        "main_score": 0.639455,
+        "hf_subset": "default",
+        "languages": [
+          "eng-Latn"
+        ]
+      }
+    ]
+  },
+  "evaluation_time": 3.413235902786255,
+  "kg_co2_emissions": null
+}

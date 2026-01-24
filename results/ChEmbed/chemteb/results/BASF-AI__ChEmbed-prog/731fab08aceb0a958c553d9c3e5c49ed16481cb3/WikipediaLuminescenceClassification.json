@@ -1,0 +1,139 @@
+{
+  "dataset_revision": "21c4dcebe2c5b36a35292e6441e7a10b59bf4896",
+  "task_name": "WikipediaLuminescenceClassification",
+  "mteb_version": "2.7.8",
+  "scores": {
+    "test": [
+      {
+        "scores_per_experiment": [
+          {
+            "accuracy": 0.95122,
+            "f1": 0.945767,
+            "f1_weighted": 0.9508,
+            "precision": 0.954209,
+            "precision_weighted": 0.951647,
+            "recall": 0.938842,
+            "recall_weighted": 0.95122,
+            "ap": 0.899931,
+            "ap_weighted": 0.899931
+          },
+          {
+            "accuracy": 0.865854,
+            "f1": 0.859829,
+            "f1_weighted": 0.868334,
+            "precision": 0.853261,
+            "precision_weighted": 0.883484,
+            "recall": 0.880612,
+            "recall_weighted": 0.865854,
+            "ap": 0.722666,
+            "ap_weighted": 0.722666
+          },
+          {
+            "accuracy": 0.878049,
+            "f1": 0.866623,
+            "f1_weighted": 0.878049,
+            "precision": 0.866623,
+            "precision_weighted": 0.878049,
+            "recall": 0.866623,
+            "recall_weighted": 0.878049,
+            "ap": 0.745875,
+            "ap_weighted": 0.745875
+          },
+          {
+            "accuracy": 0.817073,
+            "f1": 0.812357,
+            "f1_weighted": 0.821064,
+            "precision": 0.81369,
+            "precision_weighted": 0.854283,
+            "recall": 0.842876,
+            "recall_weighted": 0.817073,
+            "ap": 0.652839,
+            "ap_weighted": 0.652839
+          },
+          {
+            "accuracy": 0.841463,
+            "f1": 0.837376,
+            "f1_weighted": 0.844922,
+            "precision": 0.838095,
+            "precision_weighted": 0.878513,
+            "recall": 0.869551,
+            "recall_weighted": 0.841463,
+            "ap": 0.688057,
+            "ap_weighted": 0.688057
+          },
+          {
+            "accuracy": 0.95122,
+            "f1": 0.947436,
+            "f1_weighted": 0.951563,
+            "precision": 0.941809,
+            "precision_weighted": 0.953102,
+            "recall": 0.954457,
+            "recall_weighted": 0.95122,
+            "ap": 0.884275,
+            "ap_weighted": 0.884275
+          },
+          {
+            "accuracy": 0.841463,
+            "f1": 0.830336,
+            "f1_weighted": 0.843053,
+            "precision": 0.825,
+            "precision_weighted": 0.846951,
+            "recall": 0.838321,
+            "recall_weighted": 0.841463,
+            "ap": 0.681665,
+            "ap_weighted": 0.681665
+          },
+          {
+            "accuracy": 0.878049,
+            "f1": 0.864418,
+            "f1_weighted": 0.877,
+            "precision": 0.87138,
+            "precision_weighted": 0.877096,
+            "recall": 0.858816,
+            "recall_weighted": 0.878049,
+            "ap": 0.748777,
+            "ap_weighted": 0.748777
+          },
+          {
+            "accuracy": 0.865854,
+            "f1": 0.852107,
+            "f1_weighted": 0.865304,
+            "precision": 0.855159,
+            "precision_weighted": 0.865031,
+            "recall": 0.849382,
+            "recall_weighted": 0.865854,
+            "ap": 0.724649,
+            "ap_weighted": 0.724649
+          },
+          {
+            "accuracy": 0.853659,
+            "f1": 0.849265,
+            "f1_weighted": 0.856797,
+            "precision": 0.847346,
+            "precision_weighted": 0.885219,
+            "recall": 0.878985,
+            "recall_weighted": 0.853659,
+            "ap": 0.705387,
+            "ap_weighted": 0.705387
+          }
+        ],
+        "accuracy": 0.87439,
+        "f1": 0.866551,
+        "f1_weighted": 0.875689,
+        "precision": 0.866657,
+        "precision_weighted": 0.887337,
+        "recall": 0.877846,
+        "recall_weighted": 0.87439,
+        "ap": 0.745412,
+        "ap_weighted": 0.745412,
+        "main_score": 0.87439,
+        "hf_subset": "default",
+        "languages": [
+          "eng-Latn"
+        ]
+      }
+    ]
+  },
+  "evaluation_time": 3.836333990097046,
+  "kg_co2_emissions": null
+}

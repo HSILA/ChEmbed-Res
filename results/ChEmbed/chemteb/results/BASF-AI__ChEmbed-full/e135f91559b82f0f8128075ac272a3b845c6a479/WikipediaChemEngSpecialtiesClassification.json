@@ -1,0 +1,139 @@
+{
+  "dataset_revision": "f81a76a2fb690e5d5bd7a26dd07e85cdf8405dfb",
+  "task_name": "WikipediaChemEngSpecialtiesClassification",
+  "mteb_version": "2.7.8",
+  "scores": {
+    "test": [
+      {
+        "scores_per_experiment": [
+          {
+            "accuracy": 0.774194,
+            "f1": 0.756786,
+            "f1_weighted": 0.780424,
+            "precision": 0.752539,
+            "precision_weighted": 0.800131,
+            "recall": 0.776015,
+            "recall_weighted": 0.774194,
+            "ap": null,
+            "ap_weighted": null
+          },
+          {
+            "accuracy": 0.677419,
+            "f1": 0.649962,
+            "f1_weighted": 0.676859,
+            "precision": 0.645371,
+            "precision_weighted": 0.680502,
+            "recall": 0.660137,
+            "recall_weighted": 0.677419,
+            "ap": null,
+            "ap_weighted": null
+          },
+          {
+            "accuracy": 0.758065,
+            "f1": 0.74023,
+            "f1_weighted": 0.774427,
+            "precision": 0.761418,
+            "precision_weighted": 0.821946,
+            "recall": 0.75411,
+            "recall_weighted": 0.758065,
+            "ap": null,
+            "ap_weighted": null
+          },
+          {
+            "accuracy": 0.709677,
+            "f1": 0.687751,
+            "f1_weighted": 0.717858,
+            "precision": 0.684972,
+            "precision_weighted": 0.734932,
+            "recall": 0.701232,
+            "recall_weighted": 0.709677,
+            "ap": null,
+            "ap_weighted": null
+          },
+          {
+            "accuracy": 0.725806,
+            "f1": 0.71632,
+            "f1_weighted": 0.725971,
+            "precision": 0.726542,
+            "precision_weighted": 0.745176,
+            "recall": 0.72568,
+            "recall_weighted": 0.725806,
+            "ap": null,
+            "ap_weighted": null
+          },
+          {
+            "accuracy": 0.637097,
+            "f1": 0.596801,
+            "f1_weighted": 0.639322,
+            "precision": 0.607277,
+            "precision_weighted": 0.672086,
+            "recall": 0.622479,
+            "recall_weighted": 0.637097,
+            "ap": null,
+            "ap_weighted": null
+          },
+          {
+            "accuracy": 0.75,
+            "f1": 0.735353,
+            "f1_weighted": 0.754991,
+            "precision": 0.736706,
+            "precision_weighted": 0.770168,
+            "recall": 0.748548,
+            "recall_weighted": 0.75,
+            "ap": null,
+            "ap_weighted": null
+          },
+          {
+            "accuracy": 0.733871,
+            "f1": 0.724338,
+            "f1_weighted": 0.738457,
+            "precision": 0.725533,
+            "precision_weighted": 0.757228,
+            "recall": 0.736206,
+            "recall_weighted": 0.733871,
+            "ap": null,
+            "ap_weighted": null
+          },
+          {
+            "accuracy": 0.685484,
+            "f1": 0.673682,
+            "f1_weighted": 0.69348,
+            "precision": 0.672331,
+            "precision_weighted": 0.745939,
+            "recall": 0.717749,
+            "recall_weighted": 0.685484,
+            "ap": null,
+            "ap_weighted": null
+          },
+          {
+            "accuracy": 0.782258,
+            "f1": 0.758108,
+            "f1_weighted": 0.787082,
+            "precision": 0.749159,
+            "precision_weighted": 0.802357,
+            "recall": 0.778952,
+            "recall_weighted": 0.782258,
+            "ap": null,
+            "ap_weighted": null
+          }
+        ],
+        "accuracy": 0.723387,
+        "f1": 0.703933,
+        "f1_weighted": 0.728887,
+        "precision": 0.706185,
+        "precision_weighted": 0.753047,
+        "recall": 0.722111,
+        "recall_weighted": 0.723387,
+        "ap": NaN,
+        "ap_weighted": NaN,
+        "main_score": 0.723387,
+        "hf_subset": "default",
+        "languages": [
+          "eng-Latn"
+        ]
+      }
+    ]
+  },
+  "evaluation_time": 7.2063844203948975,
+  "kg_co2_emissions": null
+}

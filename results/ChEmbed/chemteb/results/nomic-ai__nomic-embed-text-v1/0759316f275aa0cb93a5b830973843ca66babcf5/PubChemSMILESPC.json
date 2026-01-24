@@ -1,0 +1,48 @@
+{
+  "dataset_revision": "7ba40b69f5fe6ffe4cc189aac9e1710913c73c8a",
+  "task_name": "PubChemSMILESPC",
+  "mteb_version": "2.7.8",
+  "scores": {
+    "test": [
+      {
+        "similarity_accuracy": 0.900879,
+        "similarity_f1": 0.182224,
+        "similarity_precision": 0.100246,
+        "similarity_recall": 1.0,
+        "similarity_ap": 0.116285,
+        "cosine_accuracy": 0.900879,
+        "cosine_f1": 0.182224,
+        "cosine_precision": 0.100246,
+        "cosine_recall": 1.0,
+        "cosine_ap": 0.116285,
+        "manhattan_accuracy": 0.900879,
+        "manhattan_f1": 0.184883,
+        "manhattan_precision": 0.103976,
+        "manhattan_recall": 0.833333,
+        "manhattan_ap": 0.120136,
+        "euclidean_accuracy": 0.900879,
+        "euclidean_f1": 0.182224,
+        "euclidean_precision": 0.100246,
+        "euclidean_recall": 1.0,
+        "euclidean_ap": 0.116285,
+        "dot_accuracy": 0.900879,
+        "dot_f1": 0.182224,
+        "dot_precision": 0.100246,
+        "dot_recall": 1.0,
+        "dot_ap": 0.116285,
+        "max_accuracy": 0.900879,
+        "max_f1": 0.184883,
+        "max_precision": 0.103976,
+        "max_recall": 1.0,
+        "max_ap": 0.120136,
+        "main_score": 0.120136,
+        "hf_subset": "default",
+        "languages": [
+          "eng-Latn"
+        ]
+      }
+    ]
+  },
+  "evaluation_time": 6.598688125610352,
+  "kg_co2_emissions": null
+}

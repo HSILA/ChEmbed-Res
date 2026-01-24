@@ -1,0 +1,48 @@
+{
+  "dataset_revision": "7ba40b69f5fe6ffe4cc189aac9e1710913c73c8a",
+  "task_name": "PubChemSMILESPC",
+  "mteb_version": "2.7.8",
+  "scores": {
+    "test": [
+      {
+        "similarity_accuracy": 0.900879,
+        "similarity_f1": 0.190528,
+        "similarity_precision": 0.107165,
+        "similarity_recall": 0.857843,
+        "similarity_ap": 0.120391,
+        "cosine_accuracy": 0.900879,
+        "cosine_f1": 0.190528,
+        "cosine_precision": 0.107165,
+        "cosine_recall": 0.857843,
+        "cosine_ap": 0.120391,
+        "manhattan_accuracy": 0.900879,
+        "manhattan_f1": 0.190635,
+        "manhattan_precision": 0.107547,
+        "manhattan_recall": 0.838235,
+        "manhattan_ap": 0.122578,
+        "euclidean_accuracy": 0.900879,
+        "euclidean_f1": 0.190528,
+        "euclidean_precision": 0.107165,
+        "euclidean_recall": 0.857843,
+        "euclidean_ap": 0.120391,
+        "dot_accuracy": 0.900879,
+        "dot_f1": 0.190528,
+        "dot_precision": 0.107165,
+        "dot_recall": 0.857843,
+        "dot_ap": 0.120391,
+        "max_accuracy": 0.900879,
+        "max_f1": 0.190635,
+        "max_precision": 0.107547,
+        "max_recall": 0.857843,
+        "max_ap": 0.122578,
+        "main_score": 0.122578,
+        "hf_subset": "default",
+        "languages": [
+          "eng-Latn"
+        ]
+      }
+    ]
+  },
+  "evaluation_time": 6.43501615524292,
+  "kg_co2_emissions": null
+}
