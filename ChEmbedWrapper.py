@@ -1,9 +1,10 @@
 import torch
+from transformers import AutoTokenizer
 import torch.nn.functional as F
 from mteb.models.sentence_transformer_wrapper import SentenceTransformerEncoderWrapper
 from mteb.types import PromptType
+from loguru import logger
 
-# Protected internal prompts, baked into the wrapper
 _NOMIC_PROMPTS = {
     "Classification": "classification: ",
     "MultilabelClassification": "classification: ",
@@ -23,16 +24,21 @@ class ChEmbedWrapper(SentenceTransformerEncoderWrapper):
         if "model_prompts" not in kwargs:
             kwargs["model_prompts"] = _NOMIC_PROMPTS
 
-        # Ensure trust_remote_code is preserved
-        if "trust_remote_code" in kwargs:
-            print(
-                f"DEBUG: ChEmbedWrapper received and passing trust_remote_code={kwargs['trust_remote_code']}"
-            )
-        else:
-            print("DEBUG: ChEmbedWrapper did NOT receive trust_remote_code!")
-
         super().__init__(model_name, **kwargs)
         self.model_name = model_name
+
+        if "BASF-AI/ChEmbed" in model_name and "vanilla" not in model_name:
+            logger.info(f"Replacing tokenizer for {model_name} with BASF-AI/ChemVocab")
+            new_tokenizer = AutoTokenizer.from_pretrained(
+                "BASF-AI/ChemVocab", trust_remote_code=True
+            )
+            # Replace the tokenizer in the first module (Transformer)
+            transformer_module = self.model._first_module()
+            transformer_module.tokenizer = new_tokenizer
+            # Also update the auto_model config if possible, although not strictly required for inference if input_ids are correct
+            if hasattr(transformer_module, "auto_model"):
+                # Optional: print vocab size match check
+                logger.info(f"New tokenizer vocab size: {len(new_tokenizer)}")
 
     def to(self, device: torch.device) -> None:
         self.model.to(device)
@@ -69,13 +75,6 @@ class ChEmbedWrapper(SentenceTransformerEncoderWrapper):
             batch_size=batch_size,
             **kwargs,
         )
-
-        if self.model_name == "nomic-ai/nomic-embed-text-v1.5":
-            if not isinstance(emb, torch.Tensor):
-                emb = torch.tensor(emb)
-            emb = F.layer_norm(emb, normalized_shape=(emb.shape[1],))
-            if normalize:
-                emb = F.normalize(emb, p=2, dim=1)
 
         if isinstance(emb, torch.Tensor):
             emb = emb.cpu().detach().float().numpy()
