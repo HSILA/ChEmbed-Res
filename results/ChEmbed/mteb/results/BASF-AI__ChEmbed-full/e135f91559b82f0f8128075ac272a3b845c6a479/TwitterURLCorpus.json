@@ -1,0 +1,48 @@
+{
+  "dataset_revision": "8b6510b0b1fa4e4c4f879467980e9be563ec1cdf",
+  "task_name": "TwitterURLCorpus",
+  "mteb_version": "2.7.8",
+  "scores": {
+    "test": [
+      {
+        "similarity_accuracy": 0.894031,
+        "similarity_f1": 0.792447,
+        "similarity_precision": 0.759114,
+        "similarity_recall": 0.828842,
+        "similarity_ap": 0.866516,
+        "cosine_accuracy": 0.894031,
+        "cosine_f1": 0.792447,
+        "cosine_precision": 0.759114,
+        "cosine_recall": 0.828842,
+        "cosine_ap": 0.866516,
+        "manhattan_accuracy": 0.893973,
+        "manhattan_f1": 0.791465,
+        "manhattan_precision": 0.76023,
+        "manhattan_recall": 0.825377,
+        "manhattan_ap": 0.866255,
+        "euclidean_accuracy": 0.894031,
+        "euclidean_f1": 0.792447,
+        "euclidean_precision": 0.759114,
+        "euclidean_recall": 0.828842,
+        "euclidean_ap": 0.866515,
+        "dot_accuracy": 0.894031,
+        "dot_f1": 0.792447,
+        "dot_precision": 0.759114,
+        "dot_recall": 0.828842,
+        "dot_ap": 0.866515,
+        "max_accuracy": 0.894031,
+        "max_f1": 0.792447,
+        "max_precision": 0.76023,
+        "max_recall": 0.828842,
+        "max_ap": 0.866516,
+        "main_score": 0.866516,
+        "hf_subset": "default",
+        "languages": [
+          "eng-Latn"
+        ]
+      }
+    ]
+  },
+  "evaluation_time": 63.47494888305664,
+  "kg_co2_emissions": null
+}

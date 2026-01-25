@@ -1,0 +1,48 @@
+{
+  "dataset_revision": "d66bd1f72af766a5cc4b0ca5e00c162f89e8cc46",
+  "task_name": "SprintDuplicateQuestions",
+  "mteb_version": "2.7.8",
+  "scores": {
+    "test": [
+      {
+        "similarity_accuracy": 0.997337,
+        "similarity_f1": 0.86548,
+        "similarity_precision": 0.856164,
+        "similarity_recall": 0.875,
+        "similarity_ap": 0.927682,
+        "cosine_accuracy": 0.997337,
+        "cosine_f1": 0.86548,
+        "cosine_precision": 0.856164,
+        "cosine_recall": 0.875,
+        "cosine_ap": 0.927682,
+        "manhattan_accuracy": 0.997356,
+        "manhattan_f1": 0.865554,
+        "manhattan_precision": 0.849711,
+        "manhattan_recall": 0.882,
+        "manhattan_ap": 0.927229,
+        "euclidean_accuracy": 0.997337,
+        "euclidean_f1": 0.86548,
+        "euclidean_precision": 0.856164,
+        "euclidean_recall": 0.875,
+        "euclidean_ap": 0.927682,
+        "dot_accuracy": 0.997337,
+        "dot_f1": 0.86548,
+        "dot_precision": 0.856164,
+        "dot_recall": 0.875,
+        "dot_ap": 0.927682,
+        "max_accuracy": 0.997356,
+        "max_f1": 0.865554,
+        "max_precision": 0.856164,
+        "max_recall": 0.882,
+        "max_ap": 0.927682,
+        "main_score": 0.927682,
+        "hf_subset": "default",
+        "languages": [
+          "eng-Latn"
+        ]
+      }
+    ]
+  },
+  "evaluation_time": 194.12273955345154,
+  "kg_co2_emissions": null
+}
