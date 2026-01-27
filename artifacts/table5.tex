@@ -1,0 +1,32 @@
+\begin{table*}[!b]
+\centering \small
+\caption{Performance comparison across shared non‑retrieval task categories in MTEB and ChemTEB, covering open‑domain and chemistry‑specific data, respectively. Evaluation metrics are: accuracy for Classification, V‑measure for Clustering, and average precision (AP) for Pair Classification. Mean (Task) reports the average score across all individual tasks, while Mean (Task Type) first averages results within each task category and then computes the mean across the category‑level averages.}
+\label{tab:nonretrieval-wide}
+\setlength{\tabcolsep}{5pt}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l
+              ccc cc
+              ccc cc}
+\toprule
+& \multicolumn{5}{c}{\textbf{ChemTEB}} & \multicolumn{5}{c}{\textbf{MTEB}}\\
+\cmidrule(lr){2-6}\cmidrule(lr){7-11}
+Model
+& Cls & Clust & Pair & Mean (T) & Mean (T-type)
+& Cls & Clust & Pair & Mean (T) & Mean (T-type)\\
+\midrule
+nomic-embed-text-v1-unsupervised & 0.825 & 0.560 & \textbf{0.632} & 0.763 & 0.672
+               & 0.688 & 0.442 & 0.832 & 0.607 & 0.654 \\
+nomic-embed-text-v1 & \textbf{0.838} & \textbf{0.607} & 0.591 & \textbf{0.768} & \textbf{0.679}
+               & 0.684 & \textbf{0.458} & \textbf{0.851} & 0.616 & 0.665 \\
+\texttt{ChEmbed\textsubscript{vanilla}} & 0.795 & 0.529 & 0.594 & 0.731 & 0.639
+               & 0.763 & 0.424 & 0.839 & 0.632 & 0.675 \\
+\texttt{ChEmbed\textsubscript{full}} & 0.811 & 0.546 & 0.544 & 0.733 & 0.633
+               & \textbf{0.769} & 0.435 & 0.846 & \textbf{0.641} & \textbf{0.684} \\
+\texttt{ChEmbed\textsubscript{plug}} & 0.796 & 0.587 & 0.564 & 0.730 & 0.649
+               & 0.763 & 0.426 & 0.839 & 0.633 & 0.676 \\
+\texttt{ChEmbed\textsubscript{progressive}} & 0.801 & 0.477 & 0.564 & 0.725 & 0.614
+               & 0.765 & 0.428 & 0.842 & 0.635 & 0.678 \\
+\bottomrule
+\end{tabular}
+}
+\end{table*}

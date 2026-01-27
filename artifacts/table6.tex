@@ -1,0 +1,17 @@
+\begin{table*}[!t]
+\centering
+\caption{Retrieval performance comparison across chemistry-specific and open‑domain tasks. Dataset descriptions and performance metrics for each model–dataset pair are provided.}
+\label{tab:retrieval-wide}
+\setlength{\tabcolsep}{5pt}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{ll c ccc}
+\toprule
+ & & & \multicolumn{3}{c}{\textbf{nDCG@10 $\uparrow$}} \\ 
+\cmidrule(lr){4-6}
+Task & Dataset & Domain-Specific & nomic-embed-text-v1 & \texttt{ChEmbed\textsubscript{vanilla}} & \texttt{ChEmbed\textsubscript{progressive}} \\ 
+\midrule
+Chemistry Retrieval & ChemTEB(latest)   & \cmark  & \textbf{0.780} & 0.749 & 0.764 \\
+Open-domain Retrieval & MTEB Retrieval       & \xmark & \textbf{0.544} & 0.457 & 0.462 \\
+\bottomrule
+\end{tabular}}
+\end{table*}

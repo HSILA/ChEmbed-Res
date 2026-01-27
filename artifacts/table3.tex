@@ -1,0 +1,17 @@
+\subsection{Domain-Specific Retrieval Performance}
+\begin{table}[!b]
+    \centering
+    \caption{Impact of different tokenizer-adaptation variants on ChemRxiv retrieval performance}
+    \label{tab:tok-ablation}
+    \begin{tabular}{lcc}
+    \toprule
+    \textbf{Variant} & $nDCG@10$ & $\Delta$ vs.\ baseline \\
+    \midrule
+    \texttt{nomic-embed-text-v1} (baseline)       & 0.832 & --      \\
+    \texttt{ChEmbed\textsubscript{vanilla}}       & 0.902 & +7.0 \% \\
+    \texttt{ChEmbed\textsubscript{full}}          & 0.895 & +6.3 \% \\
+    \texttt{ChEmbed\textsubscript{plug}}          & 0.903 & +7.1 \% \\
+    \textbf{\texttt{ChEmbed\textsubscript{progressive}}} & \textbf{0.911} & +7.9 \% \\
+    \bottomrule
+    \end{tabular}
+\end{table}

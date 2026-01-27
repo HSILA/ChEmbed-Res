@@ -1,0 +1,346 @@
+{
+  "ChemTEB": [
+    {
+      "name": "PubChemSMILESBitextMining",
+      "type": "BitextMining",
+      "category": "t2t"
+    },
+    {
+      "name": "SDSEyeProtectionClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "SDSGlovesClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "WikipediaBioMetChemClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "WikipediaGreenhouseEnantiopureClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "WikipediaSolidStateColloidalClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "WikipediaOrganicInorganicClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "WikipediaCryobiologySeparationClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "WikipediaChemistryTopicsClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "WikipediaTheoreticalAppliedClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "WikipediaChemFieldsClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "WikipediaLuminescenceClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "WikipediaIsotopesFissionClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "WikipediaSaltsSemiconductorsClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "WikipediaBiolumNeurochemClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "WikipediaCrystallographyAnalyticalClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "WikipediaCompChemSpectroscopyClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "WikipediaChemEngSpecialtiesClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "WikipediaChemistryTopicsClustering",
+      "type": "Clustering",
+      "category": "t2c"
+    },
+    {
+      "name": "WikipediaSpecialtiesInChemistryClustering",
+      "type": "Clustering",
+      "category": "t2c"
+    },
+    {
+      "name": "PubChemAISentenceParaphrasePC",
+      "type": "PairClassification",
+      "category": "t2t"
+    },
+    {
+      "name": "PubChemSMILESPC",
+      "type": "PairClassification",
+      "category": "t2t"
+    },
+    {
+      "name": "PubChemSynonymPC",
+      "type": "PairClassification",
+      "category": "t2t"
+    },
+    {
+      "name": "PubChemWikiParagraphsPC",
+      "type": "PairClassification",
+      "category": "t2t"
+    },
+    {
+      "name": "PubChemWikiPairClassification",
+      "type": "PairClassification",
+      "category": "t2t"
+    },
+    {
+      "name": "ChemNQRetrieval",
+      "type": "Retrieval",
+      "category": "t2t"
+    },
+    {
+      "name": "ChemHotpotQARetrieval",
+      "type": "Retrieval",
+      "category": "t2t"
+    }
+  ],
+  "MTEB(eng, v2)": [
+    {
+      "name": "ArguAna",
+      "type": "Retrieval",
+      "category": "t2t"
+    },
+    {
+      "name": "ArXivHierarchicalClusteringP2P",
+      "type": "Clustering",
+      "category": "t2c"
+    },
+    {
+      "name": "ArXivHierarchicalClusteringS2S",
+      "type": "Clustering",
+      "category": "t2c"
+    },
+    {
+      "name": "AskUbuntuDupQuestions",
+      "type": "Reranking",
+      "category": "t2t"
+    },
+    {
+      "name": "BIOSSES",
+      "type": "STS",
+      "category": "t2t"
+    },
+    {
+      "name": "Banking77Classification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "BiorxivClusteringP2P.v2",
+      "type": "Clustering",
+      "category": "t2c"
+    },
+    {
+      "name": "CQADupstackGamingRetrieval",
+      "type": "Retrieval",
+      "category": "t2t"
+    },
+    {
+      "name": "CQADupstackUnixRetrieval",
+      "type": "Retrieval",
+      "category": "t2t"
+    },
+    {
+      "name": "ClimateFEVERHardNegatives",
+      "type": "Retrieval",
+      "category": "t2t"
+    },
+    {
+      "name": "FEVERHardNegatives",
+      "type": "Retrieval",
+      "category": "t2t"
+    },
+    {
+      "name": "FiQA2018",
+      "type": "Retrieval",
+      "category": "t2t"
+    },
+    {
+      "name": "HotpotQAHardNegatives",
+      "type": "Retrieval",
+      "category": "t2t"
+    },
+    {
+      "name": "ImdbClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "MTOPDomainClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "MassiveIntentClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "MassiveScenarioClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "MedrxivClusteringP2P.v2",
+      "type": "Clustering",
+      "category": "t2c"
+    },
+    {
+      "name": "MedrxivClusteringS2S.v2",
+      "type": "Clustering",
+      "category": "t2c"
+    },
+    {
+      "name": "MindSmallReranking",
+      "type": "Reranking",
+      "category": "t2t"
+    },
+    {
+      "name": "SCIDOCS",
+      "type": "Retrieval",
+      "category": "t2t"
+    },
+    {
+      "name": "SICK-R",
+      "type": "STS",
+      "category": "t2t"
+    },
+    {
+      "name": "STS12",
+      "type": "STS",
+      "category": "t2t"
+    },
+    {
+      "name": "STS13",
+      "type": "STS",
+      "category": "t2t"
+    },
+    {
+      "name": "STS14",
+      "type": "STS",
+      "category": "t2t"
+    },
+    {
+      "name": "STS15",
+      "type": "STS",
+      "category": "t2t"
+    },
+    {
+      "name": "STSBenchmark",
+      "type": "STS",
+      "category": "t2t"
+    },
+    {
+      "name": "SprintDuplicateQuestions",
+      "type": "PairClassification",
+      "category": "t2t"
+    },
+    {
+      "name": "StackExchangeClustering.v2",
+      "type": "Clustering",
+      "category": "t2c"
+    },
+    {
+      "name": "StackExchangeClusteringP2P.v2",
+      "type": "Clustering",
+      "category": "t2c"
+    },
+    {
+      "name": "TRECCOVID",
+      "type": "Retrieval",
+      "category": "t2t"
+    },
+    {
+      "name": "Touche2020Retrieval.v3",
+      "type": "Retrieval",
+      "category": "t2t"
+    },
+    {
+      "name": "ToxicConversationsClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "TweetSentimentExtractionClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "TwentyNewsgroupsClustering.v2",
+      "type": "Clustering",
+      "category": "t2c"
+    },
+    {
+      "name": "TwitterSemEval2015",
+      "type": "PairClassification",
+      "category": "t2t"
+    },
+    {
+      "name": "TwitterURLCorpus",
+      "type": "PairClassification",
+      "category": "t2t"
+    },
+    {
+      "name": "SummEvalSummarization.v2",
+      "type": "Summarization",
+      "category": "t2t"
+    },
+    {
+      "name": "AmazonCounterfactualClassification",
+      "type": "Classification",
+      "category": "t2c"
+    },
+    {
+      "name": "STS17",
+      "type": "STS",
+      "category": "t2t"
+    },
+    {
+      "name": "STS22.v2",
+      "type": "STS",
+      "category": "t2t"
+    }
+  ]
+}

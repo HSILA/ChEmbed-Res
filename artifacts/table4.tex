@@ -1,0 +1,65 @@
+\begin{table*}[!t]
+\centering \small
+\caption{Performance of embedding models on the \textbf{ChemRxiv Retrieval} task. “N/A” means the provider has not released parameter counts. Best scores per metric are shown in bold.}
+\label{tab:chemrxiv-results}
+\begin{tabular}{lccccc}
+\toprule
+Model Name & Emb. size & \#Params (M) & MAP@10 & MRR@10 & NDCG@10 \\
+\midrule
+    \multicolumn{6}{l}{\textbf{Open-Source Models}}\\
+    \texttt{chemical-bert-uncased} & 768 & 110.0 & 0.096 & 0.096 & 0.110 \\
+    \texttt{matscibert} & 768 & 110.0 & 0.117 & 0.117 & 0.137 \\
+    \texttt{nomic-bert-2048} & None & 137.3 & 0.019 & 0.019 & 0.025 \\
+    \texttt{ModernBERT-base} & 768 & 149.7 & 0.047 & 0.047 & 0.056 \\
+    \texttt{ModernBERT-large} & 1024 & 395.9 & 0.048 & 0.048 & 0.058 \\
+    \texttt{scibert\_scivocab\_uncased} & 768 & N/A & 0.101 & 0.100 & 0.119 \\
+    \texttt{bert-base-uncased} & 768 & 110.1 & 0.099 & 0.099 & 0.117 \\
+    \texttt{all-MiniLM-L12-v2} & 384 & 33.4 & 0.556 & 0.556 & 0.603 \\
+    \texttt{all-MiniLM-L6-v2} & 384 & 22.7 & 0.626 & 0.626 & 0.674 \\
+    \texttt{all-mpnet-base-v2} & 768 & 109.0 & 0.618 & 0.618 & 0.670 \\
+    \texttt{multi-qa-mpnet-base-dot-v1} & 768 & 109.5 & 0.697 & 0.697 & 0.741 \\
+    \texttt{e5-small} & 384 & 33.0 & 0.682 & 0.682 & 0.726 \\
+    \texttt{e5-base} & 768 & 109.0 & 0.728 & 0.728 & 0.770 \\
+    \texttt{e5-large} & 1024 & 335.0 & 0.765 & 0.765 & 0.806 \\
+    \texttt{e5-small-v2} & 384 & 33.0 & 0.714 & 0.715 & 0.756 \\
+    \texttt{e5-base-v2} & 768 & 109.0 & 0.717 & 0.718 & 0.761 \\
+    \texttt{e5-large-v2} & 1024 & 335.0 & 0.781 & 0.781 & 0.821 \\
+    \texttt{multilingual-e5-small} & 384 & 118.0 & 0.736 & 0.736 & 0.778 \\
+    \texttt{multilingual-e5-base} & 768 & 278.0 & 0.758 & 0.758 & 0.798 \\
+    \texttt{multilingual-e5-large} & 1024 & 560.0 & 0.753 & 0.753 & 0.794 \\
+    \texttt{gte-small} & 384 & 33.4 & 0.687 & 0.687 & 0.735 \\
+    \texttt{gte-base} & 768 & 109.5 & 0.700 & 0.700 & 0.748 \\
+    \texttt{gte-large} & 1024 & 335.1 & 0.722 & 0.722 & 0.768 \\
+    \texttt{gte-multilingual-base} & 768 & 305.0 & 0.712 & 0.712 & 0.761 \\
+    \texttt{bge-small-en} & 512 & 33.4 & 0.705 & 0.705 & 0.751 \\
+    \texttt{bge-base-en} & 768 & 109.0 & 0.721 & 0.721 & 0.766 \\
+    \texttt{bge-large-en} & 1024 & 335.0 & 0.741 & 0.741 & 0.785 \\
+    \texttt{bge-small-en-v1.5} & 512 & 33.4 & 0.704 & 0.704 & 0.750 \\
+    \texttt{bge-base-en-v1.5} & 768 & 109.0 & 0.729 & 0.729 & 0.773 \\
+    \texttt{bge-large-en-v1.5} & 1024 & 335.0 & 0.744 & 0.744 & 0.787 \\
+    \texttt{bge-m3} & 1024 & 568.0 & 0.758 & 0.758 & 0.798 \\
+    \texttt{nomic-embed-text-v1-unsupervised} & 768 & N/A & 0.781 & 0.781 & 0.821 \\
+    \texttt{nomic-embed-text-v1} & 768 & N/A & 0.796 & 0.796 & 0.832 \\
+    \texttt{nomic-embed-text-v1.5} & 768 & 137.0 & 0.739 & 0.739 & 0.783 \\
+    \texttt{nomic-embed-text-v2-moe} & 768 & 475.3 & 0.780 & 0.780 & 0.819 \\
+    \texttt{modernbert-embed-base} & 768 & 149.0 & 0.765 & 0.765 & 0.807 \\
+    \texttt{stella\_en\_1.5B\_v5} & 8960 & 1540.0 & 0.759 & 0.760 & 0.802 \\
+    \texttt{jina-embeddings-v3} & 1024 & 572.0 & 0.715 & 0.715 & 0.759 \\
+    \texttt{Qwen3-Embedding-0.6B}$^{\dagger}$ & 1024 & 595.8 & 0.803 & 0.803 & 0.840 \\
+    \texttt{Qwen3-Embedding-4B}$^{\dagger}$ & 2560 & 4021.8 & 0.838 & 0.838 & 0.871 \\
+    \texttt{Qwen3-Embedding-8B}$^{\dagger}$ & 4096 & 7567.3 & 0.846 & 0.846 & 0.878 \\
+    \texttt{ChEmbed\textsubscript{vanilla}} & 768 & 136.7 & 0.878 & 0.878 & 0.902 \\
+    \texttt{ChEmbed\textsubscript{progressive}} & 768 & 136.7 & \textbf{0.888} & \textbf{0.888} & \textbf{0.911} \\
+    \midrule
+    \multicolumn{6}{l}{\textbf{Proprietary Models}}\\
+    \texttt{text-embedding-ada-002} & 1536 & N/A & 0.748 & 0.748 & 0.790 \\
+    \texttt{text-embedding-3-small} & 1536 & N/A & 0.724 & 0.724 & 0.771 \\
+    \texttt{text-embedding-3-large} & 3072 & N/A & 0.734 & 0.734 & 0.780 \\
+    \texttt{amazon-titan-embed-text-v1} & 1536 & N/A & 0.638 & 0.638 & 0.689 \\
+    \texttt{amazon-titan-embed-text-v2} & 1024 & N/A & 0.763 & 0.763 & 0.805 \\
+    \texttt{cohere-embed-english-v3} & 1024 & N/A & 0.737 & 0.737 & 0.781 \\
+    \texttt{cohere-embed-multilingual-v3} & 1024 & N/A & 0.747 & 0.747 & 0.789 \\
+    \bottomrule
+\multicolumn{6}{l}{\footnotesize $^{\dagger}$\,Loaded with bfloat16 to fit into GPU VRAM.}\\
+\end{tabular}
+\end{table*}
