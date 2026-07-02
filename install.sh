@@ -15,24 +15,27 @@ else
     echo "uv is already installed."
 fi
 
-# 2. Check and create venv if missing
+# 2. Ensure a uv-managed Python 3.12 is available
+uv python install 3.12
+
+# 3. Check and create venv if missing
 if [ ! -d ".venv" ]; then
     echo "Creating virtual environment..."
-    uv venv
+    uv venv --python 3.12 --python-preference only-managed
 else
     echo "Virtual environment already exists."
 fi
 
-# 3. Activate venv
+# 4. Activate venv
 # We activate it so subsequent 'uv pip install' commands target this environment
 # shellcheck source=/dev/null
 source .venv/bin/activate
 
-# 4. Install build dependencies first
+# 5. Install build dependencies first
 echo "Installing build dependencies..."
 uv pip install torch==2.9.0 setuptools wheel ninja
 
-# 5. Calculate MAX_JOBS
+# 6. Calculate MAX_JOBS
 RAM_GB=$(free -g | awk '/^Mem:/{print $2}')
 CORES=$(nproc)
 # Handle potential zero or empty values safely
@@ -55,15 +58,15 @@ fi
 
 echo "Auto-configuring build: Detected ${RAM_GB}GB RAM, ${CORES} Cores -> MAX_JOBS=${MAX_JOBS}"
 
-# 6. Install flash attention with limits
+# 7. Install flash attention with limits
 echo "Installing mteb[flash_attention]..."
 MAX_JOBS=$MAX_JOBS uv pip install "mteb[flash_attention]==2.7.12" --no-build-isolation
 
-# 7. Install additional MTEB extras
+# 8. Install additional MTEB extras
 echo "Installing mteb extras (gritlm, openai)..."
 uv pip install "mteb[gritlm]" "mteb[openai]"
 
-# 7. Install the project and other dependencies
+# 9. Install the project and other dependencies
 echo "Installing project dependencies..."
 uv pip install .
 
