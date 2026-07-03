@@ -61,14 +61,22 @@ def load_data():
         if skip:
             continue
 
-        # Find results
-        hash_dirs = glob.glob(os.path.join(model_path, "*"))
+        # Find results: pin to the exact revision recorded in models_metadata.json
+        # rather than taking whichever hash directory glob happens to return first.
+        model_meta_for_dir = models_meta.get(model_dir, {})
+        pinned_revision = model_meta_for_dir.get("revision")
+        if pinned_revision:
+            candidate = os.path.join(model_path, pinned_revision)
+            hash_dirs = [candidate] if os.path.isdir(candidate) else []
+        else:
+            hash_dirs = glob.glob(os.path.join(model_path, "*"))
+
         for hash_dir in hash_dirs:
             if not os.path.isdir(hash_dir):
                 continue
-                
+
             res_file = os.path.join(hash_dir, "ChemRxivRetrieval.json")
-            
+
             if os.path.exists(res_file):
                 try:
                     with open(res_file, 'r') as f:

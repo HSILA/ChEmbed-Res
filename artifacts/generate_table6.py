@@ -9,6 +9,7 @@ RESULTS_DIR = "results/ChEmbed"
 CHEMTEB_DIR = os.path.join(RESULTS_DIR, "chemteb", "results")
 MTEB_DIR = os.path.join(RESULTS_DIR, "mteb", "results")
 BENCHMARK_MAP_FILE = "artifacts/benchmark_tasks_map.json"
+MODELS_FILE = "models/ChEmbed.json"
 
 # Models to include in table
 MODELS = [
@@ -20,6 +21,12 @@ MODELS = [
 def load_benchmark_map():
     with open(BENCHMARK_MAP_FILE, 'r') as f:
         return json.load(f)
+
+def load_model_revisions():
+    """Map dir-style model names (org__model) to the exact pinned revision."""
+    with open(MODELS_FILE, 'r') as f:
+        raw = json.load(f)
+    return {k.replace("/", "__"): v for k, v in raw.items()}
 
 def get_retrieval_tasks(benchmark_name, benchmark_data):
     """Identify Retrieval tasks from the benchmark map."""
@@ -36,11 +43,15 @@ def get_retrieval_tasks(benchmark_name, benchmark_data):
     
     return retrieval_tasks
 
-def get_ndcg_at_10(base_dir, model_name, task_name):
-    """Retrieve ndcg_at_10 for a task."""
+def get_ndcg_at_10(base_dir, model_name, task_name, revision=None):
+    """Retrieve ndcg_at_10 for a task, pinned to an exact revision."""
     model_path = os.path.join(base_dir, model_name)
-    hash_dirs = glob.glob(os.path.join(model_path, "*"))
-    
+
+    if revision:
+        hash_dirs = [os.path.join(model_path, revision)]
+    else:
+        hash_dirs = glob.glob(os.path.join(model_path, "*"))
+
     json_path = None
     for hd in hash_dirs:
         cand = os.path.join(hd, f"{task_name}.json")
@@ -52,8 +63,8 @@ def get_ndcg_at_10(base_dir, model_name, task_name):
              if candidates:
                  json_path = candidates[0]
                  break
-    
-    if not json_path or not os.path.exists(json_path): 
+
+    if not json_path or not os.path.exists(json_path):
         return None
     
     try:
@@ -70,10 +81,10 @@ def get_ndcg_at_10(base_dir, model_name, task_name):
         pass
     return None
 
-def compute_mean_ndcg(tasks, base_dir, model_name):
+def compute_mean_ndcg(tasks, base_dir, model_name, revision=None):
     scores = []
     for task in tasks:
-        s = get_ndcg_at_10(base_dir, model_name, task)
+        s = get_ndcg_at_10(base_dir, model_name, task, revision)
         if s is not None:
             scores.append(s)
     
@@ -90,16 +101,17 @@ def format_score(val, is_best=False):
 
 def main():
     benchmark_data = load_benchmark_map()
-    
+    model_revisions = load_model_revisions()
+
     # 1. ChemTEB Retrieval
     chem_tasks = get_retrieval_tasks("ChemTEB", benchmark_data)
     # Manually add ChemRxivRetrieval if not present
     if "ChemRxivRetrieval" not in chem_tasks:
         chem_tasks.append("ChemRxivRetrieval")
-    
+
     # 2. MTEB Retrieval
     mteb_tasks = get_retrieval_tasks("MTEB(eng, v2)", benchmark_data)
-    
+
     print(f"ChemTEB Retrieval Tasks: {len(chem_tasks)} ({chem_tasks})")
     print(f"MTEB Retrieval Tasks: {len(mteb_tasks)} ({mteb_tasks})")
 
@@ -107,12 +119,16 @@ def main():
     # Row 1: ChemTEB
     row1_scores = []
     for _, dir_name in MODELS:
-        row1_scores.append(compute_mean_ndcg(chem_tasks, CHEMTEB_DIR, dir_name))
+        revision = model_revisions.get(dir_name)
+        if revision is None:
+            print(f"Warning: no pinned revision found for {dir_name} in {MODELS_FILE}; falling back to scanning all revision folders.")
+        row1_scores.append(compute_mean_ndcg(chem_tasks, CHEMTEB_DIR, dir_name, revision))
 
     # Row 2: MTEB Retrieval
     row2_scores = []
     for _, dir_name in MODELS:
-        row2_scores.append(compute_mean_ndcg(mteb_tasks, MTEB_DIR, dir_name))
+        revision = model_revisions.get(dir_name)
+        row2_scores.append(compute_mean_ndcg(mteb_tasks, MTEB_DIR, dir_name, revision))
 
     # Determine Bests
     best1 = max(row1_scores)

@@ -9,6 +9,7 @@ RESULTS_DIR = "results/ChEmbed"
 CHEMTEB_DIR = os.path.join(RESULTS_DIR, "chemteb", "results")
 MTEB_DIR = os.path.join(RESULTS_DIR, "mteb", "results")
 BENCHMARK_MAP_FILE = "artifacts/benchmark_tasks_map.json"
+MODELS_FILE = "models/ChEmbed.json"
 
 # Model Mapping: (Display Name, Directory Name)
 MODELS = [
@@ -23,6 +24,12 @@ MODELS = [
 def load_benchmark_map():
     with open(BENCHMARK_MAP_FILE, 'r') as f:
         return json.load(f)
+
+def load_model_revisions():
+    """Map dir-style model names (org__model) to the exact pinned revision."""
+    with open(MODELS_FILE, 'r') as f:
+        raw = json.load(f)
+    return {k.replace("/", "__"): v for k, v in raw.items()}
 
 def get_tasks_from_map(benchmark_name, benchmark_data):
     """Identify tasks and categories from the benchmark map."""
@@ -45,11 +52,17 @@ def get_tasks_from_map(benchmark_name, benchmark_data):
             
     return tasks
 
-def get_score(base_dir, model_name, task_name):
-    """Retrieve main_score or relevant metric for a task."""
+def get_score(base_dir, model_name, task_name, revision=None):
+    """Retrieve main_score or relevant metric for a task, pinned to an exact revision."""
     model_path = os.path.join(base_dir, model_name)
-    hash_dirs = glob.glob(os.path.join(model_path, "*"))
-    
+
+    if revision:
+        hash_dirs = [os.path.join(model_path, revision)]
+    else:
+        # No pinned revision known for this model: fall back to scanning
+        # (should only happen for models missing from models/ChEmbed.json).
+        hash_dirs = glob.glob(os.path.join(model_path, "*"))
+
     json_path = None
     for hd in hash_dirs:
         cand = os.path.join(hd, f"{task_name}.json")
@@ -61,8 +74,8 @@ def get_score(base_dir, model_name, task_name):
              if candidates:
                  json_path = candidates[0]
                  break
-    
-    if not json_path or not os.path.exists(json_path): 
+
+    if not json_path or not os.path.exists(json_path):
         return None
     
     try:
@@ -78,14 +91,14 @@ def get_score(base_dir, model_name, task_name):
         pass
     return None
 
-def compute_metrics(category_tasks, base_dir, model_name):
+def compute_metrics(category_tasks, base_dir, model_name, revision=None):
     """Compute per-category means and overall means."""
     scores = {'Cls': [], 'Clust': [], 'Pair': []}
     all_scores = []
-    
+
     for cat in ['Cls', 'Clust', 'Pair']:
         for task in category_tasks[cat]:
-            s = get_score(base_dir, model_name, task)
+            s = get_score(base_dir, model_name, task, revision)
             if s is not None:
                 scores[cat].append(s)
                 all_scores.append(s)
@@ -114,19 +127,23 @@ def format_score(val, is_best=False):
 
 def main():
     benchmark_data = load_benchmark_map()
-    
+    model_revisions = load_model_revisions()
+
     chem_tasks = get_tasks_from_map("ChemTEB", benchmark_data)
-    mteb_tasks = get_tasks_from_map("MTEB(eng, v2)", benchmark_data) 
-    
+    mteb_tasks = get_tasks_from_map("MTEB(eng, v2)", benchmark_data)
+
     print(f"ChemTEB Tasks Configured: Cls={len(chem_tasks['Cls'])}, Clust={len(chem_tasks['Clust'])}, Pair={len(chem_tasks['Pair'])}")
     print(f"MTEB Tasks Configured: Cls={len(mteb_tasks['Cls'])}, Clust={len(mteb_tasks['Clust'])}, Pair={len(mteb_tasks['Pair'])}")
 
     # Collect data
-    results = [] 
-    
+    results = []
+
     for display_name, dir_name in MODELS:
-        c_metrics = compute_metrics(chem_tasks, CHEMTEB_DIR, dir_name)
-        m_metrics = compute_metrics(mteb_tasks, MTEB_DIR, dir_name)
+        revision = model_revisions.get(dir_name)
+        if revision is None:
+            print(f"Warning: no pinned revision found for {dir_name} in {MODELS_FILE}; falling back to scanning all revision folders.")
+        c_metrics = compute_metrics(chem_tasks, CHEMTEB_DIR, dir_name, revision)
+        m_metrics = compute_metrics(mteb_tasks, MTEB_DIR, dir_name, revision)
         results.append((display_name, c_metrics, m_metrics))
 
     # Determine bests

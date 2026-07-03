@@ -42,22 +42,22 @@
     "BASF-AI__ChEmbed-full": {
         "n_parameters": 136731648,
         "embed_dim": 768,
-        "revision": "e135f91559b82f0f8128075ac272a3b845c6a479"
+        "revision": "3b7415473eb13c0387b9748e000ad29e65ec4672"
     },
     "BASF-AI__ChEmbed-plug": {
         "n_parameters": 136731648,
         "embed_dim": 768,
-        "revision": "4822ae672dabb8e655d37f0774dc3572dfd0b729"
+        "revision": "f4da2bb144d7df3ff847edc44534e778d7a2f671"
     },
     "BASF-AI__ChEmbed-prog": {
         "n_parameters": 136731648,
         "embed_dim": 768,
-        "revision": "731fab08aceb0a958c553d9c3e5c49ed16481cb3"
+        "revision": "2cac1b6e7f9c5a419fcde18dac57efcde0f0da54"
     },
     "BASF-AI__ChEmbed-vanilla": {
         "n_parameters": 136731648,
         "embed_dim": 768,
-        "revision": "ce564699a8df39cf3412207c2c0ceb9e77f693cb"
+        "revision": "07e70156973b50b2caf483d6455b819697957cdb"
     },
     "NovaSearch__stella_en_1.5B_v5": {
         "n_parameters": 1540000000,

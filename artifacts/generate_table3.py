@@ -9,6 +9,7 @@ PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 
 RESULTS_DIR = os.path.join(PROJECT_ROOT, "results", "chemrxiv", "results")
 OUTPUT_FILE = os.path.join(SCRIPT_DIR, "table3.tex")
+MODELS_FILE = os.path.join(PROJECT_ROOT, "models", "models.json")
 
 # Model directory name -> Display name
 MODELS = [
@@ -19,10 +20,21 @@ MODELS = [
     ("BASF-AI__ChEmbed-prog", r"\textbf{\texttt{ChEmbed\textsubscript{progressive}}}")
 ]
 
-def get_ndcg_at_10(model_dir_name):
+def load_model_revisions():
+    """Map dir-style model names (org__model) to the exact pinned revision."""
+    with open(MODELS_FILE, 'r') as f:
+        raw = json.load(f)
+    return {k.replace("/", "__"): v for k, v in raw.items()}
+
+def get_ndcg_at_10(model_dir_name, revision=None):
     model_path = os.path.join(RESULTS_DIR, model_dir_name)
-    # Find the hash directory
-    hash_dirs = glob.glob(os.path.join(model_path, "*"))
+
+    if revision:
+        candidate = os.path.join(model_path, revision)
+        hash_dirs = [candidate] if os.path.isdir(candidate) else []
+    else:
+        hash_dirs = glob.glob(os.path.join(model_path, "*"))
+
     for hash_dir in hash_dirs:
         if os.path.isdir(hash_dir):
             json_file = os.path.join(hash_dir, "ChemRxivRetrieval.json")
@@ -38,10 +50,14 @@ def get_ndcg_at_10(model_dir_name):
 def generate_table():
     results = {}
     baseline_score = None
-    
+    model_revisions = load_model_revisions()
+
     # First pass to get scores
     for model_dir, display_name in MODELS:
-        score = get_ndcg_at_10(model_dir)
+        revision = model_revisions.get(model_dir)
+        if revision is None:
+            print(f"Warning: no pinned revision found for {model_dir} in {MODELS_FILE}; falling back to scanning all revision folders.")
+        score = get_ndcg_at_10(model_dir, revision)
         if score is None:
             print(f"Warning: Could not find results for {model_dir}")
             continue

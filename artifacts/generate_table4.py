@@ -8,6 +8,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 RESULTS_DIR = os.path.join(PROJECT_ROOT, "results", "chemrxiv", "results")
 OUTPUT_FILE = os.path.join(SCRIPT_DIR, "table4.tex")
+MODELS_FILE = os.path.join(PROJECT_ROOT, "models", "models.json")
 
 # Defines the table structure: (directory__name, latex_display_name)
 # We preserve the exact order from the original table4-old.tex
@@ -67,7 +68,13 @@ PROPRIETARY_MODELS = [
     ("bedrock__cohere-embed-multilingual-v3", r"\texttt{cohere-embed-multilingual-v3}"),
 ]
 
-def get_model_data(model_dir_name):
+def load_model_revisions():
+    """Map dir-style model names (org__model) to the exact pinned revision."""
+    with open(MODELS_FILE, 'r') as f:
+        raw = json.load(f)
+    return {k.replace("/", "__"): v for k, v in raw.items()}
+
+def get_model_data(model_dir_name, revision=None):
     model_path = os.path.join(RESULTS_DIR, model_dir_name)
     data = {
         "emb_size": "N/A",
@@ -76,7 +83,7 @@ def get_model_data(model_dir_name):
         "mrr_at_10": 0.0,
         "ndcg_at_10": 0.0
     }
-    
+
     # Check if directory exists
     if not os.path.exists(model_path):
         # try simple name match if mapped incorrectly
@@ -86,9 +93,14 @@ def get_model_data(model_dir_name):
         else:
             return None
 
-    # Find the hash directory (usually just one)
-    hash_dirs = glob.glob(os.path.join(model_path, "*"))
-    
+    # Pin to the exact known revision when we have one; otherwise fall back
+    # to scanning (e.g. models not present in models/models.json).
+    if revision:
+        candidate = os.path.join(model_path, revision)
+        hash_dirs = [candidate] if os.path.isdir(candidate) else []
+    else:
+        hash_dirs = glob.glob(os.path.join(model_path, "*"))
+
     found_data = False
     
     for hash_dir in hash_dirs:
@@ -138,7 +150,8 @@ def generate_table():
     ]
 
     all_scores = {"map": [], "mrr": [], "ndcg": []}
-    
+    model_revisions = load_model_revisions()
+
     # Store processed rows to format bolding later
     rows = []
 
@@ -146,7 +159,10 @@ def generate_table():
     for model_list in [OPEN_SOURCE_MODELS, PROPRIETARY_MODELS]:
         group_rows = []
         for model_id, model_name in model_list:
-            data = get_model_data(model_id)
+            revision = model_revisions.get(model_id)
+            if revision is None:
+                print(f"Warning: no pinned revision found for {model_id} in {MODELS_FILE}; falling back to scanning all revision folders.")
+            data = get_model_data(model_id, revision)
             if data:
                 all_scores["map"].append(data["map_at_10"])
                 all_scores["mrr"].append(data["mrr_at_10"])
