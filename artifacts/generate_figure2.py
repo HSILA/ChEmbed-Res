@@ -82,17 +82,17 @@ def load_data():
                     with open(res_file, 'r') as f:
                         res = json.load(f)
                         
-                    ndcg = res["scores"]["test"][0]["ndcg_at_10"]
+                    mrr = res["scores"]["test"][0]["mrr_at_10"]
                     time = res["evaluation_time"]
-                    
+
                     # Get metadata from JSON
                     model_meta = models_meta.get(model_dir, {})
                     params = model_meta.get("n_parameters")
                     embed_dim = model_meta.get("embed_dim")
-                    
+
                     data.append({
                         "exp": model_dir,
-                        "ndcgat10": ndcg,
+                        "mrrat10": mrr,
                         "evaluation_time": time,
                         "n_parameters": params,
                         "embedding_size": embed_dim
@@ -201,7 +201,7 @@ def plot_model_scatter(
 
     # Axes labels
     ax.set_xlabel("Speed (examples per sec)")
-    ax.set_ylabel("nDCG@10")
+    ax.set_ylabel("MRR@10")
     ax.grid(True, ls="--", alpha=0.3)
 
     xmin, xmax = ax.get_xlim()
@@ -236,9 +236,9 @@ def main():
     df["examples_per_sec"] = EXAMPLES / df["evaluation_time"]
     
     plot_model_scatter(
-        df, 
-        x_col="examples_per_sec", 
-        y_col="ndcgat10"
+        df,
+        x_col="examples_per_sec",
+        y_col="mrrat10"
     )
 
 if __name__ == "__main__":

@@ -26,7 +26,7 @@ def load_model_revisions():
         raw = json.load(f)
     return {k.replace("/", "__"): v for k, v in raw.items()}
 
-def get_ndcg_at_10(model_dir_name, revision=None):
+def get_mrr_at_10(model_dir_name, revision=None):
     model_path = os.path.join(RESULTS_DIR, model_dir_name)
 
     if revision:
@@ -42,7 +42,7 @@ def get_ndcg_at_10(model_dir_name, revision=None):
                 with open(json_file, 'r') as f:
                     data = json.load(f)
                     try:
-                        return data["scores"]["test"][0]["ndcg_at_10"]
+                        return data["scores"]["test"][0]["mrr_at_10"]
                     except (KeyError, IndexError):
                         continue
     return None
@@ -57,7 +57,7 @@ def generate_table():
         revision = model_revisions.get(model_dir)
         if revision is None:
             print(f"Warning: no pinned revision found for {model_dir} in {MODELS_FILE}; falling back to scanning all revision folders.")
-        score = get_ndcg_at_10(model_dir, revision)
+        score = get_mrr_at_10(model_dir, revision)
         if score is None:
             print(f"Warning: Could not find results for {model_dir}")
             continue
@@ -77,7 +77,7 @@ def generate_table():
         r"    \label{tab:tok-ablation}",
         r"    \begin{tabular}{lcc}",
         r"    \toprule",
-        r"    \textbf{Variant} & $nDCG@10$ & $\Delta$ vs.\ baseline \\",
+        r"    \textbf{Variant} & $MRR@10$ & $\Delta$ vs.\ baseline \\",
         r"    \midrule"
     ]
 
