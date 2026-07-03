@@ -48,8 +48,8 @@ Model Name & Emb. size & \#Params (M) & MAP@10 & MRR@10 & NDCG@10 \\
     \texttt{Qwen3-Embedding-0.6B}$^{\dagger}$ & 1024 & 595.8 & 0.803 & 0.803 & 0.840 \\
     \texttt{Qwen3-Embedding-4B}$^{\dagger}$ & 2560 & 4021.8 & 0.838 & 0.838 & 0.871 \\
     \texttt{Qwen3-Embedding-8B}$^{\dagger}$ & 4096 & 7567.3 & 0.846 & 0.846 & 0.878 \\
-    \texttt{ChEmbed\textsubscript{vanilla}} & 768 & 136.7 & 0.878 & 0.878 & 0.902 \\
-    \texttt{ChEmbed\textsubscript{progressive}} & 768 & 136.7 & \textbf{0.888} & \textbf{0.888} & \textbf{0.911} \\
+    \texttt{ChEmbed\textsubscript{vanilla}} & 768 & 136.7 & 0.879 & 0.879 & 0.903 \\
+    \texttt{ChEmbed\textsubscript{progressive}} & 768 & 136.7 & \textbf{0.882} & \textbf{0.882} & \textbf{0.906} \\
     \midrule
     \multicolumn{6}{l}{\textbf{Proprietary Models}}\\
     \texttt{text-embedding-ada-002} & 1536 & N/A & 0.748 & 0.748 & 0.790 \\
@@ -60,6 +60,5 @@ Model Name & Emb. size & \#Params (M) & MAP@10 & MRR@10 & NDCG@10 \\
     \texttt{cohere-embed-english-v3} & 1024 & N/A & 0.737 & 0.737 & 0.781 \\
     \texttt{cohere-embed-multilingual-v3} & 1024 & N/A & 0.747 & 0.747 & 0.789 \\
     \bottomrule
-\multicolumn{6}{l}{\footnotesize $^{\dagger}$\,Loaded with bfloat16 to fit into GPU VRAM.}\\
-\end{tabular}
+\multicolumn{6}{l}{\footnotesize $^{\dagger}$\,Loaded the model with bfloat16 to fit into GPU VRAM.}\\\end{tabular}
 \end{table*}
