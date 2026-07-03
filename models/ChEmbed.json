@@ -1,8 +1,8 @@
 {
-  "BASF-AI/ChEmbed-full": "e135f91559b82f0f8128075ac272a3b845c6a479",
-  "BASF-AI/ChEmbed-plug": "4822ae672dabb8e655d37f0774dc3572dfd0b729",
-  "BASF-AI/ChEmbed-prog": "731fab08aceb0a958c553d9c3e5c49ed16481cb3",
-  "BASF-AI/ChEmbed-vanilla": "ce564699a8df39cf3412207c2c0ceb9e77f693cb",
+  "BASF-AI/ChEmbed-full": "3b7415473eb13c0387b9748e000ad29e65ec4672",
+  "BASF-AI/ChEmbed-plug": "f4da2bb144d7df3ff847edc44534e778d7a2f671",
+  "BASF-AI/ChEmbed-prog": "2cac1b6e7f9c5a419fcde18dac57efcde0f0da54",
+  "BASF-AI/ChEmbed-vanilla": "07e70156973b50b2caf483d6455b819697957cdb",
   "nomic-ai/nomic-embed-text-v1": "0759316f275aa0cb93a5b830973843ca66babcf5",
   "nomic-ai/nomic-embed-text-v1-unsupervised": "b53d557b15ae63852847c222d336c1609eced93c"
 }
