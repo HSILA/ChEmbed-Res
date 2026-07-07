@@ -87,7 +87,55 @@ def compute_mean_ndcg(tasks, base_dir, model_name, revision=None):
         s = get_ndcg_at_10(base_dir, model_name, task, revision)
         if s is not None:
             scores.append(s)
-    
+
+    if not scores:
+        return 0.0
+    return np.mean(scores)
+
+def get_mrr_at_10(base_dir, model_name, task_name, revision=None):
+    """Retrieve mrr_at_10 for a task, pinned to an exact revision."""
+    model_path = os.path.join(base_dir, model_name)
+
+    if revision:
+        hash_dirs = [os.path.join(model_path, revision)]
+    else:
+        hash_dirs = glob.glob(os.path.join(model_path, "*"))
+
+    json_path = None
+    for hd in hash_dirs:
+        cand = os.path.join(hd, f"{task_name}.json")
+        if os.path.exists(cand):
+            json_path = cand
+            break
+        if not json_path:
+             candidates = glob.glob(os.path.join(hd, f"{task_name}*.json"))
+             if candidates:
+                 json_path = candidates[0]
+                 break
+
+    if not json_path or not os.path.exists(json_path):
+        return None
+
+    try:
+        with open(json_path, 'r') as f:
+            data = json.load(f)
+
+        if "scores" in data and "test" in data["scores"]:
+            test_res = data["scores"]["test"][0]
+            if "mrr_at_10" in test_res:
+                return test_res["mrr_at_10"]
+
+    except Exception as e:
+        pass
+    return None
+
+def compute_mean_mrr(tasks, base_dir, model_name, revision=None):
+    scores = []
+    for task in tasks:
+        s = get_mrr_at_10(base_dir, model_name, task, revision)
+        if s is not None:
+            scores.append(s)
+
     if not scores:
         return 0.0
     return np.mean(scores)
@@ -116,15 +164,18 @@ def main():
     print(f"MTEB Retrieval Tasks: {len(mteb_tasks)} ({mteb_tasks})")
 
     # Compute Scores
-    # Row 1: ChemTEB
+    # Row 1: ChemTEB (ChemNQRetrieval, ChemHotpotQARetrieval, ChemRxivRetrieval) --
+    # dominated by single-relevant-document-per-query tasks, so we report MRR@10
+    # here rather than NDCG@10 (see generate_table3.py / limitations-notes.md).
     row1_scores = []
     for _, dir_name in MODELS:
         revision = model_revisions.get(dir_name)
         if revision is None:
             print(f"Warning: no pinned revision found for {dir_name} in {MODELS_FILE}; falling back to scanning all revision folders.")
-        row1_scores.append(compute_mean_ndcg(chem_tasks, CHEMTEB_DIR, dir_name, revision))
+        row1_scores.append(compute_mean_mrr(chem_tasks, CHEMTEB_DIR, dir_name, revision))
 
-    # Row 2: MTEB Retrieval
+    # Row 2: MTEB Retrieval -- genuinely multi-relevant-document retrieval tasks
+    # (ArguAna, FEVER, TRECCOVID, etc.), so NDCG@10 remains the appropriate metric.
     row2_scores = []
     for _, dir_name in MODELS:
         revision = model_revisions.get(dir_name)
@@ -147,8 +198,10 @@ def main():
     latex_lines.append(r"\begin{tabular}{ll c ccc}")
     latex_lines.append(r"\toprule")
     # Header row
-    # Task | Dataset | Domain-Specific | nDCG@10 (header spanning 3 cols)
-    latex_lines.append(r" & & & \multicolumn{3}{c}{\textbf{nDCG@10 $\uparrow$}} \\ ")
+    # Task | Dataset | Domain-Specific | Retrieval Score (header spanning 3 cols)
+    # Metric differs by row: MRR@10 for Chemistry Retrieval (single-positive),
+    # NDCG@10 for Open-domain Retrieval (multi-relevant) -- see footnote below.
+    latex_lines.append(r" & & & \multicolumn{3}{c}{\textbf{Retrieval Score$^{\ddagger}$ $\uparrow$}} \\ ")
     latex_lines.append(r"\cmidrule(lr){4-6}")
     
     # Model Names Header
@@ -174,6 +227,7 @@ def main():
     latex_lines.append(r"Open-domain Retrieval & MTEB Retrieval       & \xmark & " + " & ".join(cells2) + r" \\")
 
     latex_lines.append(r"\bottomrule")
+    latex_lines.append(r"\multicolumn{6}{l}{\footnotesize $^{\ddagger}$\,MRR@10 for Chemistry Retrieval (single relevant document per query); NDCG@10 for Open-domain Retrieval (multiple relevant documents per query).}\\")
     latex_lines.append(r"\end{tabular}}")
     latex_lines.append(r"\end{table*}")
     

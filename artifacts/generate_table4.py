@@ -140,13 +140,13 @@ def generate_table():
     latex_lines = [
         r"\begin{table*}[!t]",
         r"\centering \small",
-        r"\caption{Performance of embedding models on the \textbf{ChemRxiv Retrieval} task. “N/A” means the provider has not released parameter counts. Best scores per metric are shown in bold.}",
+        r"\caption{Performance of embedding models on the \textbf{ChemRxiv Retrieval} task. ChemRxiv Retrieval has exactly one relevant document per query, so MAP@10 and MRR@10 coincide; we report MRR@10 only. “N/A” means the provider has not released parameter counts. Best scores per metric are shown in bold.}",
         r"\label{tab:chemrxiv-results}",
-        r"\begin{tabular}{lccccc}",
+        r"\begin{tabular}{lcccc}",
         r"\toprule",
-        r"Model Name & Emb. size & \#Params (M) & MAP@10 & MRR@10 & NDCG@10 \\",
+        r"Model Name & Emb. size & \#Params (M) & MRR@10 & NDCG@10 \\",
         r"\midrule",
-        r"    \multicolumn{6}{l}{\textbf{Open-Source Models}}\\"
+        r"    \multicolumn{5}{l}{\textbf{Open-Source Models}}\\"
     ]
 
     all_scores = {"map": [], "mrr": [], "ndcg": []}
@@ -185,43 +185,42 @@ def generate_table():
     # Format Rows
     def format_row(name, d):
         if d is None:
-            return f"    {name} & N/A & N/A & - & - & - \\\\"
-        
+            return f"    {name} & N/A & N/A & - & - \\\\"
+
         # Emb Size
         emb = str(d['emb_size'])
-        
+
         # Params
         params = str(d['params'])
-        
-        # Metrics
-        map_val = d['map_at_10']
+
+        # Metrics (MAP@10 intentionally omitted: with exactly one relevant
+        # document per query, MAP@10 coincides with MRR@10, so we only
+        # report MRR@10 + NDCG@10.)
         mrr_val = d['mrr_at_10']
         ndcg_val = d['ndcg_at_10']
-        
-        s_map = f"{map_val:.3f}"
+
         s_mrr = f"{mrr_val:.3f}"
         s_ndcg = f"{ndcg_val:.3f}"
-        
-        if map_val >= max_map: s_map = f"\\textbf{{{s_map}}}"
+
         if mrr_val >= max_mrr: s_mrr = f"\\textbf{{{s_mrr}}}"
         if ndcg_val >= max_ndcg: s_ndcg = f"\\textbf{{{s_ndcg}}}"
-        
-        return f"    {name} & {emb} & {params} & {s_map} & {s_mrr} & {s_ndcg} \\\\"
+
+        return f"    {name} & {emb} & {params} & {s_mrr} & {s_ndcg} \\\\"
 
     # Add Open Source Rows
     for r in rows[0]:
         latex_lines.append(format_row(r[0], r[1]))
-    
+
     latex_lines.append(r"    \midrule")
-    latex_lines.append(r"    \multicolumn{6}{l}{\textbf{Proprietary Models}}\\")
-    
+    latex_lines.append(r"    \multicolumn{5}{l}{\textbf{Proprietary Models}}\\")
+
     # Add Proprietary Rows
     for r in rows[1]:
         latex_lines.append(format_row(r[0], r[1]))
 
     latex_lines.extend([
         r"    \bottomrule",
-        r"\multicolumn{6}{l}{\footnotesize $^{\dagger}$\,Loaded the model with bfloat16 to fit into GPU VRAM.}\\"
+        r"\multicolumn{5}{l}{\footnotesize $^{\dagger}$\,Loaded the model with bfloat16 to fit into GPU VRAM.}\\"
         r"\end{tabular}",
         r"\end{table*}"
     ])
