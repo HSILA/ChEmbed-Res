@@ -4,15 +4,15 @@
 \label{tab:retrieval-wide}
 \setlength{\tabcolsep}{5pt}
 \resizebox{\textwidth}{!}{
-\begin{tabular}{ll c ccc}
+\begin{tabular}{ll c ccc | ccc}
 \toprule
- & & & \multicolumn{3}{c}{\textbf{Retrieval Score$^{\ddagger}$ $\uparrow$}} \\ 
-\cmidrule(lr){4-6}
-Task & Dataset & Domain-Specific & nomic-embed-text-v1 & \texttt{ChEmbed\textsubscript{vanilla}} & \texttt{ChEmbed\textsubscript{progressive}} \\ 
+ & & & \multicolumn{3}{c|}{\textbf{Dataset statistics}} & \multicolumn{3}{c}{\textbf{Retrieval Score$^{\ddagger}$ $\uparrow$}} \\ 
+\cmidrule(lr){4-6}\cmidrule(lr){7-9}
+Task & Dataset & Domain-Specific & \#Tasks & Avg Queries & Avg Corpus & nomic-embed-text-v1 & \texttt{ChEmbed\textsubscript{vanilla}} & \texttt{ChEmbed\textsubscript{progressive}} \\ 
 \midrule
-Chemistry Retrieval & ChemTEB(latest)   & \cmark  & \textbf{0.746} & 0.741 & 0.728 \\
-Open-domain Retrieval & MTEB Retrieval       & \xmark & \textbf{0.544} & 0.467 & 0.475 \\
+Chemistry Retrieval & ChemTEB(latest) & \cmark & 3 & 5116 & $85,958$ & \textbf{0.746} & 0.741 & 0.728 \\
+Open-domain Retrieval & MTEB Retrieval & \xmark & 10 & 1482 & $109,645$ & \textbf{0.544} & 0.467 & 0.475 \\
 \bottomrule
-\multicolumn{6}{l}{\footnotesize $^{\ddagger}$\,MRR@10 for Chemistry Retrieval (single relevant document per query); NDCG@10 for Open-domain Retrieval (multiple relevant documents per query).}\\
+\multicolumn{9}{l}{\footnotesize $^{\ddagger}$\,MRR@10 for Chemistry Retrieval (single relevant document per query); NDCG@10 for Open-domain Retrieval (multiple relevant documents per query).}\\
 \end{tabular}}
 \end{table*}

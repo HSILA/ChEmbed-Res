@@ -18,6 +18,26 @@ MODELS = [
     (r"\texttt{ChEmbed\textsubscript{progressive}}", "BASF-AI__ChEmbed-prog"),
 ]
 
+# Dataset statistics (Task, Dataset name, Domain-Specific, #Tasks, Avg Queries, Avg Corpus).
+# These describe the benchmark composition itself, not model scores, so they are not
+# derivable from the result JSONs -- fixed here rather than hand-merged into paper.tex.
+DATASET_STATS = {
+    "Chemistry Retrieval": {
+        "dataset": "ChemTEB(latest)",
+        "domain_specific": r"\cmark",
+        "n_tasks": 3,
+        "avg_queries": 5116,
+        "avg_corpus": r"$85,958$",
+    },
+    "Open-domain Retrieval": {
+        "dataset": "MTEB Retrieval",
+        "domain_specific": r"\xmark",
+        "n_tasks": 10,
+        "avg_queries": 1482,
+        "avg_corpus": r"$109,645$",
+    },
+}
+
 def load_benchmark_map():
     with open(BENCHMARK_MAP_FILE, 'r') as f:
         return json.load(f)
@@ -195,39 +215,49 @@ def main():
     latex_lines.append(r"\resizebox{\textwidth}{!}{")
     # Columns: Task | Dataset | Domain-Specific | Model1 | Model2 | Model3
     
-    latex_lines.append(r"\begin{tabular}{ll c ccc}")
+    latex_lines.append(r"\begin{tabular}{ll c ccc | ccc}")
     latex_lines.append(r"\toprule")
     # Header row
-    # Task | Dataset | Domain-Specific | Retrieval Score (header spanning 3 cols)
+    # Task | Dataset | Domain-Specific | Dataset statistics (3 cols) | Retrieval Score (3 cols)
     # Metric differs by row: MRR@10 for Chemistry Retrieval (single-positive),
     # NDCG@10 for Open-domain Retrieval (multi-relevant) -- see footnote below.
-    latex_lines.append(r" & & & \multicolumn{3}{c}{\textbf{Retrieval Score$^{\ddagger}$ $\uparrow$}} \\ ")
-    latex_lines.append(r"\cmidrule(lr){4-6}")
-    
+    latex_lines.append(r" & & & \multicolumn{3}{c|}{\textbf{Dataset statistics}} & \multicolumn{3}{c}{\textbf{Retrieval Score$^{\ddagger}$ $\uparrow$}} \\ ")
+    latex_lines.append(r"\cmidrule(lr){4-6}\cmidrule(lr){7-9}")
+
     # Model Names Header
     model_headers = [m[0] for m in MODELS]
-    latex_lines.append(r"Task & Dataset & Domain-Specific & " + " & ".join(model_headers) + r" \\ ")
+    latex_lines.append(r"Task & Dataset & Domain-Specific & \#Tasks & Avg Queries & Avg Corpus & " + " & ".join(model_headers) + r" \\ ")
     latex_lines.append(r"\midrule")
-    
+
     # Row 1
     # Check best
     cells1 = []
     for s in row1_scores:
         is_b = (s >= best1 - 1e-9) and (s > 0)
         cells1.append(format_score(s, is_b))
-        
-    latex_lines.append(r"Chemistry Retrieval & ChemTEB(latest)   & \cmark  & " + " & ".join(cells1) + r" \\")
+
+    stats1 = DATASET_STATS["Chemistry Retrieval"]
+    latex_lines.append(
+        f"Chemistry Retrieval & {stats1['dataset']} & {stats1['domain_specific']} & "
+        f"{stats1['n_tasks']} & {stats1['avg_queries']} & {stats1['avg_corpus']} & "
+        + " & ".join(cells1) + r" \\"
+    )
 
     # Row 2
     cells2 = []
     for s in row2_scores:
         is_b = (s >= best2 - 1e-9) and (s > 0)
         cells2.append(format_score(s, is_b))
-        
-    latex_lines.append(r"Open-domain Retrieval & MTEB Retrieval       & \xmark & " + " & ".join(cells2) + r" \\")
+
+    stats2 = DATASET_STATS["Open-domain Retrieval"]
+    latex_lines.append(
+        f"Open-domain Retrieval & {stats2['dataset']} & {stats2['domain_specific']} & "
+        f"{stats2['n_tasks']} & {stats2['avg_queries']} & {stats2['avg_corpus']} & "
+        + " & ".join(cells2) + r" \\"
+    )
 
     latex_lines.append(r"\bottomrule")
-    latex_lines.append(r"\multicolumn{6}{l}{\footnotesize $^{\ddagger}$\,MRR@10 for Chemistry Retrieval (single relevant document per query); NDCG@10 for Open-domain Retrieval (multiple relevant documents per query).}\\")
+    latex_lines.append(r"\multicolumn{9}{l}{\footnotesize $^{\ddagger}$\,MRR@10 for Chemistry Retrieval (single relevant document per query); NDCG@10 for Open-domain Retrieval (multiple relevant documents per query).}\\")
     latex_lines.append(r"\end{tabular}}")
     latex_lines.append(r"\end{table*}")
     
