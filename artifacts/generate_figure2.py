@@ -8,6 +8,12 @@ import matplotlib.colors as mcolors
 from adjustText import adjust_text
 import numpy as np
 
+# Embed text as real TrueType outlines instead of matplotlib's default Type 3
+# fonts. Type 3 glyphs aren't proper editable text and import badly into
+# Inkscape/Illustrator (missing text, or exploded per-glyph paths). Type 42
+# (TrueType) imports as normal, whole-word, groupable text objects.
+plt.rcParams['pdf.fonttype'] = 42
+
 # Setup paths
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
