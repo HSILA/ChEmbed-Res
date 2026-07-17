@@ -103,7 +103,6 @@ def main():
             if "nomic" in model_name:
                 if "model_kwargs" not in kwargs:
                     kwargs["model_kwargs"] = {}
-                kwargs["model_kwargs"]["dtype"] = torch.bfloat16
                 kwargs["model_kwargs"]["trust_remote_code"] = True
                 encode_kwargs["batch_size"] = 16
 
